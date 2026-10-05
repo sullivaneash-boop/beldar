@@ -1,0 +1,292 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* Dark ("Night Shift") is driven by data-theme on <html>, resolved pre-paint. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+@custom-variant glue (&:where([data-glue="true"], [data-glue="true"] *));
+
+/*
+ * REMULAK FABRICATION BUREAU — design tokens
+ * Aged form paper, denim institutional blue, prosthetic flesh, stamped red,
+ * and one restrained extraterrestrial chartreuse.
+ */
+:root {
+  --paper: #f4efe3;
+  --paper-2: #ebe3d1;
+  --card-bg: #fbf8f1;
+  --ink: #1d1c1a;
+  --ink-2: #4a463f;
+  --ink-3: #6b665c;
+  --rule: #d3c9b3;
+  --rule-strong: #a99f88;
+  --grid: rgb(44 74 110 / 0.07);
+  --denim: #2c4a6e;
+  --denim-2: #3d5f88;
+  --denim-ink: #f7f3ea;
+  --flesh: #e8d3a2;
+  --flesh-2: #d8b77e;
+  --flesh-deep: #9b7344;
+  --signal: #a3342a;
+  --signal-bg: #f7e0da;
+  --caution: #8a5a12;
+  --caution-bg: #f7e8c6;
+  --ok: #2f6440;
+  --ok-bg: #dbe8d4;
+  --remulak: #cbd66b;
+  --remulak-ink: #46591a;
+
+  /* shadcn bridge */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--card-bg);
+  --card-foreground: var(--ink);
+  --popover: var(--card-bg);
+  --popover-foreground: var(--ink);
+  --primary: var(--denim);
+  --primary-foreground: var(--denim-ink);
+  --secondary: var(--paper-2);
+  --secondary-foreground: var(--ink);
+  --muted: var(--paper-2);
+  --muted-foreground: var(--ink-2);
+  --accent: var(--paper-2);
+  --accent-foreground: var(--ink);
+  --destructive: var(--signal);
+  --border: var(--rule);
+  --input: var(--rule-strong);
+  --ring: var(--denim);
+  --radius: 0.5rem;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #13161b;
+    --paper-2: #1b2028;
+    --card-bg: #1d232b;
+    --ink: #ede6d6;
+    --ink-2: #b4ad9e;
+    --ink-3: #8f897c;
+    --rule: #333b46;
+    --rule-strong: #4c5562;
+    --grid: rgb(203 214 107 / 0.05);
+    --denim: #9cb9de;
+    --denim-2: #b7cde8;
+    --denim-ink: #10141a;
+    --flesh: #d8bf8c;
+    --flesh-2: #b99a64;
+    --flesh-deep: #e1c595;
+    --signal: #f2907f;
+    --signal-bg: #3b1f1b;
+    --caution: #ecbd66;
+    --caution-bg: #352a14;
+    --ok: #93cf9f;
+    --ok-bg: #1b2e20;
+    --remulak: #cbd66b;
+    --remulak-ink: #d7e07e;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #13161b;
+  --paper-2: #1b2028;
+  --card-bg: #1d232b;
+  --ink: #ede6d6;
+  --ink-2: #b4ad9e;
+  --ink-3: #8f897c;
+  --rule: #333b46;
+  --rule-strong: #4c5562;
+  --grid: rgb(203 214 107 / 0.05);
+  --denim: #9cb9de;
+  --denim-2: #b7cde8;
+  --denim-ink: #10141a;
+  --flesh: #d8bf8c;
+  --flesh-2: #b99a64;
+  --flesh-deep: #e1c595;
+  --signal: #f2907f;
+  --signal-bg: #3b1f1b;
+  --caution: #ecbd66;
+  --caution-bg: #352a14;
+  --ok: #93cf9f;
+  --ok-bg: #1b2e20;
+  --remulak: #cbd66b;
+  --remulak-ink: #d7e07e;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-display);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-plex-mono);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-denim: var(--denim);
+  --color-denim-2: var(--denim-2);
+  --color-denim-ink: var(--denim-ink);
+  --color-flesh: var(--flesh);
+  --color-flesh-2: var(--flesh-2);
+  --color-flesh-deep: var(--flesh-deep);
+  --color-signal: var(--signal);
+  --color-signal-bg: var(--signal-bg);
+  --color-caution: var(--caution);
+  --color-caution-bg: var(--caution-bg);
+  --color-ok: var(--ok);
+  --color-ok-bg: var(--ok-bg);
+  --color-remulak: var(--remulak);
+  --color-remulak-ink: var(--remulak-ink);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: "ss01", "tnum" 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+  :focus-visible {
+    outline: 2.5px solid var(--denim);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: var(--remulak);
+    color: #1d1c1a;
+  }
+}
+
+/* ── Signature textures ─────────────────────────────────────────────── */
+@utility bg-grid {
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+@utility font-display {
+  font-family: var(--font-display), ui-sans-serif, sans-serif;
+  font-optical-sizing: auto;
+  letter-spacing: 0.01em;
+}
+@utility label-caps {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+@utility perforation {
+  background-image: radial-gradient(circle, var(--paper) 3px, transparent 3.5px);
+  background-size: 14px 14px;
+  background-position: center;
+}
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hands-are-covered-in-glue mode: bigger hit targets, fewer accidental taps. */
+[data-glue="true"] .glue-target {
+  min-height: 4.5rem;
+  font-size: 1.25rem;
+}
+[data-glue="true"] .glue-hide {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+[data-motion="reduce"] *, [data-motion="reduce"] *::before, [data-motion="reduce"] *::after {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* ── Print ──────────────────────────────────────────────────────────── */
+@media print {
+  :root, :root[data-theme="dark"] {
+    --paper: #fff;
+    --paper-2: #f2f2f2;
+    --card-bg: #fff;
+    --ink: #000;
+    --ink-2: #222;
+    --ink-3: #444;
+    --rule: #999;
+    --denim: #000;
+    --signal: #000;
+    --signal-bg: #fff;
+    --caution-bg: #fff;
+    --ok-bg: #fff;
+    color-scheme: light;
+  }
+  @page {
+    margin: 0.5in;
+  }
+  body {
+    background: #fff !important;
+    font-size: 11pt;
+  }
+  .no-print, nav, header[data-chrome], footer[data-chrome], [data-chrome] {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+  }
+  .print-avoid-break {
+    break-inside: avoid;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .bg-grid {
+    background-image: none !important;
+  }
+}
+.print-only {
+  display: none;
+}
